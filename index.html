@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="overlay"></div>
+    <div class="hearts"></div>
+
+    <div class="card">
+
+        <!-- Slideshow -->
+        <div class="slideshow">
+            <img src="D:\valentine\images\WhatsApp Image 2026-02-13 at 11.46.11 PM.jpeg" class="slide active">
+            <img src="D:\valentine\images\WhatsApp Image 2026-02-13 at 11.47.44 PM.jpeg" class="slide">
+            <img src="D:\valentine\images\WhatsApp Image 2026-02-13 at 11.46.29 PM.jpeg" class="slide">
+        </div>
+
+        <h1>Will You Be My Valentine? 💖</h1>
+        <p>You are the best thing that ever happened to me.</p>
+
+        <div class="buttons">
+            <button class="yes-btn" onclick="showLove()">Yes 💘</button>
+            <button id="noBtn" class="no-btn" onclick="shrinkNo()">No 😢</button>
+        </div>
+
+    </div>
+
+    <script>
+        let size = 1;
+
+        function showLove() {
+            document.querySelector(".card").innerHTML =
+                "<h1>💍 She Said Yes! 💖</h1><p>This is just the beginning of our beautiful story.</p>";
+        }
+
+        function shrinkNo() {
+            size -= 0.1;
+            const btn = document.getElementById("noBtn");
+            btn.style.transform = "scale(" + size + ")";
+            if (size <= 0.2) {
+                btn.style.display = "none";
+            }
+        }
+
+        // Slideshow
+        let slides = document.querySelectorAll(".slide");
+        let index = 0;
+
+        setInterval(() => {
+            slides[index].classList.remove("active");
+            index = (index + 1) % slides.length;
+            slides[index].classList.add("active");
+        }, 3000);
+
+        // Floating hearts
+        const heartsContainer = document.querySelector(".hearts");
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 3 + Math.random() * 5 + "s";
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+
+</html>
